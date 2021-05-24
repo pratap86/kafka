@@ -16,3 +16,12 @@ Apache Kafka with Spring Boot
 |`.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test-topic --from-beginning`|instantiate a Console Consumer without key|
 |`.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic test-topic --property "key.separator=-" --property "parse.key=true"`|instantiate a Console Producer without with key|
 |` .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test-topic --from-beginning -property "key.separator= - " --property "print.key=true"`|instantiate a Console Consumer with key|
+
+### Advanced Kafka CLI operations:
+
+#### List the topics in a cluster
+``` ruby
+.\bin\windows\kafka-topics.bat --zookeeper localhost:2181 --list
+```
+
+
