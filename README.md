@@ -72,5 +72,7 @@ Apache Kafka with Spring Boot
 ``` ruby
 .\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --describe --group console-consumer-27773
 ```
+### Kafka Behind the Scenes
+#### KafkaTemplate.send()
 
 
