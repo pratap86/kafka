@@ -3,6 +3,7 @@ package com.pratap.kafka.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pratap.kafka.domain.LibraryEvent;
+import com.pratap.kafka.domain.LibraryEventType;
 import com.pratap.kafka.producer.LibraryEventProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class LibraryEventsController {
     @PostMapping("/v3/libraryevents")
     public ResponseEntity<LibraryEvent> postLibraryEventApproachTwo(@RequestBody LibraryEvent libraryEvent) throws JsonProcessingException, ExecutionException, InterruptedException {
 
+        libraryEvent.setLibraryEventType(LibraryEventType.NEW);
         log.info("Executing postLibraryEvent() with libraryEvent : {}", objectMapper.writeValueAsString(libraryEvent));
         // invoke kafka producer
         ListenableFuture<SendResult<Integer, String>> resultListenableFuture = libraryEventProducer.sendLibraryEvent_Approach2(libraryEvent);
