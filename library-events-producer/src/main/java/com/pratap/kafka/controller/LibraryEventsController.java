@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -30,8 +31,9 @@ public class LibraryEventsController {
     private ObjectMapper objectMapper;
 
     @PostMapping("/v1/libraryevents")
-    public ResponseEntity<LibraryEvent> postLibraryEventAsynchronously(@RequestBody LibraryEvent libraryEvent) throws JsonProcessingException {
+    public ResponseEntity<LibraryEvent> postLibraryEventAsynchronously(@Valid @RequestBody LibraryEvent libraryEvent) throws JsonProcessingException {
 
+        libraryEvent.setLibraryEventType(LibraryEventType.NEW);
         log.info("Executing postLibraryEvent() with libraryEvent : {}", objectMapper.writeValueAsString(libraryEvent));
         // invoke kafka producer
         libraryEventProducer.sendLibraryEventAsynchronously(libraryEvent);
