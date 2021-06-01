@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,5 +60,17 @@ public class LibraryEventsController {
         ListenableFuture<SendResult<Integer, String>> resultListenableFuture = libraryEventProducer.sendLibraryEvent_Approach2(libraryEvent);
         log.info("sendResult : {}", resultListenableFuture.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(libraryEvent);
+    }
+
+    //PUT
+    @PutMapping("/v1/libraryevents")
+    public ResponseEntity<?> putLibraryEvent(@RequestBody @Valid LibraryEvent libraryEvent) throws JsonProcessingException, ExecutionException, InterruptedException {
+
+        if(libraryEvent.getLibraryEventId()==null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please pass the LibraryEventId");
+        }
+        libraryEvent.setLibraryEventType(LibraryEventType.UPDATE);
+        libraryEventProducer.sendLibraryEvent_Approach2(libraryEvent);
+        return ResponseEntity.status(HttpStatus.OK).body(libraryEvent);
     }
 }
