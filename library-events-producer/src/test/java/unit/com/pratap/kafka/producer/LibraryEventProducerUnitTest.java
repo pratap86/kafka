@@ -35,7 +35,7 @@ public class LibraryEventProducerUnitTest {
     ObjectMapper objectMapper = new ObjectMapper();
 
     @InjectMocks
-    LibraryEventProducer libraryEventProducer;
+    LibraryEventsProducer libraryEventProducer;
 
     @Test
     void testSendLibraryEvent_Approach2_Failure() throws JsonProcessingException {

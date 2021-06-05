@@ -21,7 +21,7 @@ import java.util.concurrent.TimeoutException;
 
 @Component
 @Slf4j
-public class LibraryEventProducer {
+public class LibraryEventsProducer {
 
     @Autowired
     private KafkaTemplate<Integer, String> kafkaTemplate;

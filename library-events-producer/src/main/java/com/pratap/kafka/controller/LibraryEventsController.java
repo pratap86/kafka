@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pratap.kafka.domain.LibraryEvent;
 import com.pratap.kafka.domain.LibraryEventType;
-import com.pratap.kafka.producer.LibraryEventProducer;
+import com.pratap.kafka.producer.LibraryEventsProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ import java.util.concurrent.ExecutionException;
 public class LibraryEventsController {
 
     @Autowired
-    private LibraryEventProducer libraryEventProducer;
+    private LibraryEventsProducer libraryEventProducer;
 
     @Autowired
     private ObjectMapper objectMapper;
